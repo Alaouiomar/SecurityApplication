@@ -1,0 +1,37 @@
+﻿
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<SecurityApp.Models.ApplicationUser> SignInManager
+@inject UserManager<SecurityApp.Models.ApplicationUser> UserManager
+
+
+<ul class="navbar-nav">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                Hello @UserManager.GetUserName(User)
+            </a>
+        </li>
+        <li class="nav-item">
+            <form id="LogoutForm" method="post" class="form-inine" asp-controller="SecurityAppAccount" asp-action="LogOff">
+                <button type="submit" class="btn nav-link">
+                    Logout
+                </button>
+            </form>
+        </li>
+    }
+    else {
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="SecurityAppAccount" asp-action="Register">
+            Register
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="SecurityAppAccount" asp-action="Login">
+            Login
+        </a>
+    </li>
+    }
+</ul>
